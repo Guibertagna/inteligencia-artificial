@@ -1,0 +1,228 @@
+--------------------------------------------------------------------------------
+SOBRE O SISTEMA ESPECIALISTA
+  -- Nome:    SEM NOME
+  -- Autores: 
+
+Operador de maior precedência: conjunção
+Fator de confiança mínimo para aceitação de regra: 50
+
+SOBRE OS ARQUIVOS
+  Arquivo original: C:\Users\guiro\OneDrive\Área de Trabalho\Inteligencia Artificial\trabai-aa.bcm
+  O sistema não possui recursos de ajuda.
+--------------------------------------------------------------------------------
+
+VARIÁVEIS
+
+  acao
+    Valores:
+      Troque os componentes afetados.
+       Nenhuma ação necessária.
+       Troque a placa mãe imediatamente
+      Ajuste a umidade e a temperatura do ambiente
+      Verificar componentes e ambiente.
+       Instale proteções anti-ESD e verifique a área de trabalho
+      Trocar a placa mae e melhorar as condiçoes de ambiente
+    Tipo:
+      univalorada
+  ESD
+    Valores:
+      ausente
+      presente
+    Tipo:
+      univalorada
+  diagnostico
+    Valores:
+      Verificar proteção contra ESD
+      investigar
+       Troca Urgente
+      trocar
+      Melhore as condições ambientais
+      ok
+      Muitas rachaduras na placa-mae por conta do ambiente inadequado
+    Tipo:
+      univalorada
+  PCB
+    Valores:
+      intacta
+      danificada
+    Tipo:
+      univalorada
+  liga
+    Valores:
+      Sim
+      nao
+    Tipo:
+      univalorada
+  risco
+    Valores:
+      baixo
+      alto
+    Tipo:
+      univalorada
+  umidade
+    Valores:
+      presente
+      ausente
+    Tipo:
+      univalorada
+  integridade pcb
+    Tipo:
+      numérica
+  ambiente
+    Valores:
+      estavel
+      adverso
+    Tipo:
+      univalorada
+
+OBJETIVOS
+
+  diagnostico
+  acao
+
+REGRAS
+
+  Regra 1
+    SE umidade = presente
+    ENTÃO ambiente = adverso CNF 100%
+
+  Regra 2
+    SE umidade = ausente
+    ENTÃO ambiente = estavel CNF 100%
+
+  Regra 3
+    SE integridade pcb < 2
+    ENTÃO PCB = intacta CNF 100%
+
+  Regra 4
+    SE integridade pcb > 2
+    ENTÃO PCB = danificada CNF 100%
+
+  Regra 5
+    SE umidade <  Troque a placa mãe imediatamente
+    ENTÃO ambiente = estavel CNF 100%
+
+  Regra 6
+    SE umidade > Ajuste a umidade e a temperatura do ambiente
+    ENTÃO ambiente = adverso CNF 100%
+
+  Regra 7
+    SE diagnostico = ok
+    ENTÃO acao =  Nenhuma ação necessária. CNF 100%
+
+  Regra 8
+    SE diagnostico = Verificar proteção contra ESD
+    ENTÃO acao =  Instale proteções anti-ESD e verifique a área de trabalho CNF 100%
+
+  Regra 9
+    SE ambiente = estavel
+    E  PCB = intacta
+    E  risco = baixo
+    ENTÃO diagnostico = ok CNF 100%
+
+  Regra 10
+    SE diagnostico = trocar
+    ENTÃO acao = Troque os componentes afetados. CNF 100%
+
+  Regra 11
+    SE ESD = presente
+    ENTÃO risco = alto CNF 100%
+
+  Regra 12
+    SE ESD = ausente
+    ENTÃO risco = baixo CNF 100%
+
+  Regra 13
+    SE diagnostico = investigar
+    ENTÃO acao = Verificar componentes e ambiente. CNF 100%
+
+  Regra 14
+    SE ambiente = adverso
+    E  risco = baixo
+    E  PCB = intacta
+    ENTÃO diagnostico = Melhore as condições ambientais CNF 100%
+
+  Regra 15
+    SE ambiente = estavel
+    E  risco = alto
+    E  PCB = danificada
+    ENTÃO diagnostico = Verificar proteção contra ESD CNF 100%
+
+  Regra 16
+    SE ambiente = adverso
+    E  risco = alto
+    E  PCB = danificada
+    ENTÃO diagnostico =  Troca Urgente CNF 100%
+
+  Regra 17
+    SE ambiente = adverso
+    E  risco = alto
+    E  PCB = intacta
+    ENTÃO diagnostico = Verificar proteção contra ESD CNF 100%
+
+  Regra 18
+    SE ambiente = estavel
+    E  risco = alto
+    E  PCB = intacta
+    ENTÃO diagnostico = Verificar proteção contra ESD CNF 100%
+
+  Regra 19
+    SE ambiente = estavel
+    E  risco = baixo
+    E  PCB = danificada
+    ENTÃO diagnostico = trocar CNF 100%
+
+  Regra 20
+    SE ambiente = estavel
+    E  risco = alto
+    E  PCB = intacta
+    ENTÃO diagnostico = Verificar proteção contra ESD CNF 100%
+
+  Regra 21
+    SE ambiente = adverso
+    E  risco = baixo
+    E  PCB = danificada
+    ENTÃO diagnostico = Muitas rachaduras na placa-mae por conta do ambiente inadequado CNF 100%
+
+  Regra 22
+    SE ambiente = adverso
+    E  risco = baixo
+    E  PCB = danificada
+    ENTÃO diagnostico = Melhore as condições ambientais CNF 100%
+
+  Regra 23
+    SE diagnostico =  Troca Urgente
+    ENTÃO acao =  Troque a placa mãe imediatamente CNF 100%
+
+  Regra 24
+    SE diagnostico = Melhore as condições ambientais
+    ENTÃO acao = Ajuste a umidade e a temperatura do ambiente CNF 100%
+
+  Regra 25
+    SE diagnostico = Muitas rachaduras na placa-mae por conta do ambiente inadequado
+    ENTÃO acao = Trocar a placa mae e melhorar as condiçoes de ambiente CNF 100%
+
+  Regra 26
+    SE liga = nao
+    ENTÃO ESD = presente CNF 100%
+
+  Regra 27
+    SE liga = Sim
+    ENTÃO ESD = ausente CNF 100%
+
+PERGUNTAS
+
+  Variável:liga
+     Pergunta:"O hardware"
+  Variável:umidade
+     Pergunta:"Nas paredes do local onde está localizado o hardware possui manchas de bolor?"
+     Motivo:"
+  Variável:integridade pcb
+     Pergunta:"Quantas rachaduras foram encontradas na Placa mãe?"
+
+--------------------------------------------------------------------------------
+Gerado com o Expert SINTA versão 1.1b
+(c) 1997 - Universidade Federal do Ceará
+           Laboratório de Inteligência Artificial
+           LIA/UFC
+--------------------------------------------------------------------------------
